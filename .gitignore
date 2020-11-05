@@ -5,4 +5,5 @@ package-lock.json
 .vscode
 .history
 .svn
+.idea
 
