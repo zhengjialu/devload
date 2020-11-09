@@ -5,9 +5,6 @@
     "create-dev-app": "./index.js"
   },
   "description": "项目脚手架生成",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zhengjialux/devload.git"
@@ -17,5 +14,9 @@
   "bugs": {
     "url": "https://github.com/zhengjialux/devload/issues"
   },
-  "homepage": "https://github.com/zhengjialux/devload#readme"
+  "homepage": "https://github.com/zhengjialux/devload#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^6.2.0"
+  }
 }
