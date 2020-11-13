@@ -2,22 +2,38 @@
 
 const cp = require('child_process')
 const path = require('path')
+const fs = require('fs')
 const chalk = require('chalk')
 const commander = require('commander')
 const package = require('./package.json')
 
 let directoryName;
+let templateType;
+let templateGit;
 
 const program = new commander.Command(package.name)
 
 // 命令配置
 program
-  .version(package.version)
+  .version(package.version, '-V, --version', '查看版本信息')
+  .helpOption('-h, --help', '查看帮助文档')
   .arguments('<directory-name>')
-  .description('初始化项目脚手架')
+  .description('项目脚手架搭建（联网操作）')
   .usage(`${chalk.red('<directory-name>')} [options]`)
   .action(function(name) {
     directoryName = name
+  })
+  .option('-v, --vue-spa', '创建 Vue(SPA) 项目', () => {
+    templateType = 'vue-spa'
+    templateGit = 'https://github.com/zhengjialu/vue_spa_environment_template.git'
+  })
+  .option('-r, --react-spa', '创建 React(SPA) 项目', () => {
+    templateType = 'react-spa'
+    templateGit = 'https://github.com/zhengjialu/react_spa_environment_template.git'
+  })
+  .option('-m, --mobile', '创建 mobile(移动端) 项目', () => {
+    templateType = 'mobile'
+    templateGit = 'https://github.com/zhengjialu/mobile_spa_environment_template.git'
   })
   .exitOverride()
 
@@ -26,18 +42,7 @@ try {
   program.parse(process.argv);
 } catch (err) {
   if (typeof directoryName === 'undefined') {
-    console.error('请输入文件夹名称来创建项目:');
-    console.log(
-      `  ${chalk.cyan(program.name())} ${chalk.green('<directory-name>')}`
-    );
-    console.log();
-    console.log('例:');
-    console.log(`  ${chalk.cyan(program.name())} ${chalk.green('my-project')}`);
-    console.log();
-    console.log('运行:');
-    console.log(`  ${chalk.cyan(`${program.name()} --help`)} 查看所有配置项`);
-    console.log();
-    process.exit(1);
+    logTips('请输入文件夹名称来创建项目')
   }
 }
 
@@ -53,5 +58,61 @@ createApp(directoryName)
  */
 function createApp(name) {
   const projectPath = path.resolve(name)
-  console.log(projectPath)
+  const projectName = path.basename(projectPath)
+
+  const files = fs.readdirSync(path.resolve())
+
+  if (files.includes(projectName)) {
+    console.log();
+    console.log(`当前路径下已经存在 ${chalk.red(projectName)} 目录`);
+    console.log();
+    process.exit(1);
+  } else {
+    if (templateType) {
+      console.log('开始创建项目文件夹');
+      console.log('')
+      fs.mkdir(projectName, () => {
+        console.log(chalk.green(`${projectName} 目录创建成功`))
+        console.log('')
+        console.log(`开始载入 ${templateType} 脚手架...`)
+        console.log('')
+        createTemplate(projectName)
+      })
+    } else {
+      logTips('请输入创建项目的框架类型')
+    }
+  }
+}
+
+/** 
+ * ----------------------家----------------------
+ * 创建脚手架 --- 「2020/11/13-17:50:06」星期五
+ * ----------------------璐----------------------
+ * @desc 根据类型从 GitHub 仓库拉取对应脚手架
+ * @param {name: String}
+ * @return null
+ */
+function createTemplate(name) {
+  cp.exec(`git clone ${templateGit}`, {
+    cwd: path.resolve(name)
+  }, () => {
+    console.log(chalk.green('项目创建成功'))
+  })
+}
+
+// 日志提示
+function logTips(err) {
+  console.log();
+  console.error(`${err}:`);
+  console.log(
+    `  ${chalk.cyan(program.name())} ${chalk.green('<directory-name>')} ${chalk.green('<type>')}`
+  );
+  console.log();
+  console.log('例:');
+  console.log(`  ${chalk.cyan(program.name())} ${chalk.green('my-project')} ${chalk.green('-r')}`);
+  console.log();
+  console.log('运行:');
+  console.log(`  ${chalk.cyan(`${program.name()} --help`)} 查看所有配置项`);
+  console.log();
+  process.exit(1);
 }
