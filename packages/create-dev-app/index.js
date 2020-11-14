@@ -9,6 +9,7 @@ const package = require('./package.json')
 
 let directoryName;
 let templateType;
+let templateName;
 let templateGit;
 
 const program = new commander.Command(package.name)
@@ -25,14 +26,17 @@ program
   })
   .option('-v, --vue-spa', '创建 Vue(SPA) 项目', () => {
     templateType = 'vue-spa'
+    templateName = 'vue_spa_environment_template'
     templateGit = 'https://github.com/zhengjialu/vue_spa_environment_template.git'
   })
   .option('-r, --react-spa', '创建 React(SPA) 项目', () => {
     templateType = 'react-spa'
+    templateName = 'react_spa_environment_template'
     templateGit = 'https://github.com/zhengjialu/react_spa_environment_template.git'
   })
   .option('-m, --mobile', '创建 mobile(移动端) 项目', () => {
     templateType = 'mobile'
+    templateName = 'mobile_spa_environment_template'
     templateGit = 'https://github.com/zhengjialu/mobile_spa_environment_template.git'
   })
   .exitOverride()
@@ -93,10 +97,20 @@ function createApp(name) {
  * @return null
  */
 function createTemplate(name) {
-  cp.exec(`git clone ${templateGit}`, {
-    cwd: path.resolve(name)
+  cp.exec(`git clone ${templateGit} ${name}`, {
+    cwd: path.resolve()
   }, () => {
     console.log(chalk.green('项目创建成功'))
+    cp.execSync(`rm -rf ${path.resolve(name)}/.git`)
+    console.log(chalk.green(''))
+    console.log(chalk.green('---------------------------------'))
+    console.log(chalk.green(''))
+    console.log(chalk.green(`___cd ${name}`))
+    console.log(chalk.green('___npm install'))
+    console.log(chalk.green('___npm start'))
+    console.log(chalk.green(''))
+    console.log(chalk.green('---------------------------------'))
+    console.log(chalk.green(''))
   })
 }
 
