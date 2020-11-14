@@ -1,20 +1,20 @@
 {
   "name": "create-dev-app",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "bin": {
     "create-dev-app": "./index.js"
   },
   "description": "项目脚手架生成",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhengjialux/devload.git"
+    "url": "git+https://github.com/zhengjialu/devload.git"
   },
   "author": "jialu.zjl",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zhengjialux/devload/issues"
+    "url": "https://github.com/zhengjialu/devload/issues"
   },
-  "homepage": "https://github.com/zhengjialux/devload#readme",
+  "homepage": "https://github.com/zhengjialu/devload#readme",
   "dependencies": {
     "chalk": "^4.1.0",
     "commander": "^6.2.0"
