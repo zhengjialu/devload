@@ -57,7 +57,7 @@ createApp(directoryName)
  * 创建目录 --- 「2020/11/12-17:31:25」星期四
  * ----------------------璐----------------------
  * @desc 通过传入的 directoryName 在本地电脑位置创建同名目录
- * @param {name: string}
+ * @param name: String 类型（输入的文件夹名称，用于存放项目）
  * @return null
  */
 function createApp(name) {
@@ -93,7 +93,7 @@ function createApp(name) {
  * 创建脚手架 --- 「2020/11/13-17:50:06」星期五
  * ----------------------璐----------------------
  * @desc 根据类型从 GitHub 仓库拉取对应脚手架
- * @param {name: String}
+ * @param name: String 类型（用于寻找存放脚手架内容的项目）
  * @return null
  */
 function createTemplate(name) {
