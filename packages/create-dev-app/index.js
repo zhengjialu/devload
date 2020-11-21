@@ -34,6 +34,16 @@ program
     templateName = 'react_spa_environment_template'
     templateGit = 'https://github.com/zhengjialu/react_spa_environment_template.git'
   })
+  .option('-p, --vue-mpa', '创建 Vue(MPA) 项目', () => {
+    templateType = 'vue-mpa'
+    templateName = 'vue_mpa_environment_template'
+    templateGit = 'https://github.com/zhengjialu/vue_mpa_environment_template.git'
+  })
+  .option('-a, --react-mpa', '创建 React(MPA) 项目', () => {
+    templateType = 'react-mpa'
+    templateName = 'react_mpa_environment_template'
+    templateGit = 'https://github.com/zhengjialu/react_mpa_environment_template.git'
+  })
   .option('-m, --mobile', '创建 mobile(移动端) 项目', () => {
     templateType = 'mobile'
     templateName = 'mobile_spa_environment_template'
