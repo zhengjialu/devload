@@ -22,7 +22,7 @@ program
   .description('项目脚手架搭建（联网操作）')
   .usage(`${chalk.red('<directory-name>')} [options]`)
   .action(function(name) {
-    directoryName = name
+    createApp(name)
   })
   .option('-v, --vue-spa', '创建 Vue(SPA) 项目', () => {
     templateType = 'vue-spa'
@@ -49,18 +49,19 @@ program
     templateName = 'mobile_spa_environment_template'
     templateGit = 'https://github.com/zhengjialu/mobile_spa_environment_template.git'
   })
+  .option('-d, --datav', '创建 datav(可视化) 项目', () => {
+    templateType = 'datav'
+    templateName = 'dataview_mpa_environment_template'
+    templateGit = 'https://github.com/zhengjialu/dataview_mpa_environment_template.git'
+  })
   .exitOverride()
 
 // 自定义错误提示
 try {
   program.parse(process.argv);
 } catch (err) {
-  if (typeof directoryName === 'undefined') {
-    logTips('请输入文件夹名称来创建项目')
-  }
+  // logTips('请输入文件夹名称来创建项目')
 }
-
-createApp(directoryName)
 
 /** 
  * ----------------------家----------------------
