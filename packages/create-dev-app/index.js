@@ -123,7 +123,7 @@ function createTemplate(name) {
     console.log(chalk.green('---------------------------------'))
     console.log(chalk.green(''))
 
-    if (process.argv[2] !== '-w') {
+    if (process.argv[3] !== '-w') {
       console.log(chalk.green(`___cd ${name}`))
       console.log(chalk.green('___npm install'))
       console.log(chalk.green('___npm start'))
