@@ -1,6 +1,6 @@
 {
   "name": "create-dev-app",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "bin": {
     "create-dev-app": "./index.js"
   },

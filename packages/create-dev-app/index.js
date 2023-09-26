@@ -130,6 +130,7 @@ function createTemplate(name) {
       console.log(chalk.green('___npm start'))
     } else {
       console.log(chalk.green('小程序项目需下载官方开发工具运行'))
+      console.log(chalk.green('https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html'))
     }
 
     console.log(chalk.green(''))
