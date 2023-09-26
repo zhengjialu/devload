@@ -94,6 +94,7 @@ function createApp(name) {
       fs.mkdir(projectName, () => {
         console.log(chalk.green(`${projectName} 目录创建成功`))
         console.log('')
+        console.log('载入进度由网络决定，如果卡住不动可先弹出稍后再试')
         console.log(`开始载入 ${templateType} 脚手架...`)
         console.log('')
         createTemplate(projectName)
