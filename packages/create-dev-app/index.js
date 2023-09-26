@@ -118,12 +118,19 @@ function createTemplate(name) {
   }, () => {
     console.log(chalk.green('项目创建成功'))
     cp.execSync(`rm -rf ${path.resolve(name)}/.git`)
+
     console.log(chalk.green(''))
     console.log(chalk.green('---------------------------------'))
     console.log(chalk.green(''))
-    console.log(chalk.green(`___cd ${name}`))
-    console.log(chalk.green('___npm install'))
-    console.log(chalk.green('___npm start'))
+
+    if (process.argv[2] !== '-w') {
+      console.log(chalk.green(`___cd ${name}`))
+      console.log(chalk.green('___npm install'))
+      console.log(chalk.green('___npm start'))
+    } else {
+      console.log(chalk.green('小程序项目需下载官方开发工具运行'))
+    }
+
     console.log(chalk.green(''))
     console.log(chalk.green('---------------------------------'))
     console.log(chalk.green(''))
