@@ -16,12 +16,12 @@ const program = new commander.Command(package.name)
 
 // 命令配置
 program
-  .version(package.version, '-V, --version', '查看版本信息')
+  .version(package.version, '--version', '查看版本信息')
   .helpOption('-h, --help', '查看帮助文档')
   .arguments('<directory-name>')
   .description('项目脚手架搭建（联网操作）')
   .usage(`${chalk.red('<directory-name>')} [options]`)
-  .action(function(name) {
+  .action(function (name) {
     createApp(name)
   })
   .option('-v, --vue-spa', '创建 Vue(SPA) 项目', () => {
@@ -48,6 +48,11 @@ program
     templateType = 'mobile'
     templateName = 'mobile_spa_environment_template'
     templateGit = 'https://github.com/zhengjialu/mobile_spa_environment_template.git'
+  })
+  .option('-w, --wechat', '创建 微信小程序 项目', () => {
+    templateType = 'wechat'
+    templateName = 'wechat_spa_environment_template'
+    templateGit = 'https://github.com/zhengjialu/wechat_spa_environment_template.git'
   })
   .option('-d, --datav', '创建 datav(可视化) 项目', () => {
     templateType = 'datav'
